@@ -7,6 +7,9 @@ import org.example.kinoxp.repositories.SnackRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+// Let's create a class that will be executed when the application starts
+// With the data we want to have in the database
+
 @AllArgsConstructor
 @Component
 public class InitData implements CommandLineRunner {

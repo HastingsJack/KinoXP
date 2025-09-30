@@ -18,7 +18,7 @@ public class SnackService {
     public List<SnackDto> getAllSnacks(){
         var snacks = snackRepository.findAll();
 
-        // Convert to DTO
+        // Convert List to DTO
         return snacks.stream().map(snackMapper::toDto).toList();
     }
 
