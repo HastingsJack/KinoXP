@@ -6,9 +6,6 @@ package org.example.kinoxp.models;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.example.kinoxp.models.enums.Role;
-
-import java.util.List;
 
 // Here we create setter and getter methods
 @Setter
