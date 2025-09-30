@@ -25,6 +25,8 @@ public class SnackController {
 
     @PostMapping
     public ResponseEntity<SnackDto> createSnack(
+            // @Valid is used to validate the request body.
+            // From the annotation in SnackDto
             @Valid @RequestBody SnackDto request) {
         var response = snackService.createSnacks(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -33,12 +35,15 @@ public class SnackController {
     @PutMapping("/{id}")
     public ResponseEntity<SnackDto> updateSnack(
             @PathVariable Integer id,
+            // @Valid is used to validate the request body.
+            // From the annotation in SnackDto
             @Valid @RequestBody SnackDto request) {
         var response = snackService.updateSnack(id, request);
 
         return ResponseEntity.ok(response);
     }
 
+    // I create this locally because it's only this controller that needs it.
     @ExceptionHandler(SnackNotFoundException.class)
     public ResponseEntity<Map<String, String>> handleException(SnackNotFoundException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
