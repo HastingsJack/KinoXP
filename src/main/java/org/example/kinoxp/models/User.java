@@ -23,6 +23,7 @@ import java.util.List;
 // If needed, you can add this constructor
 @NoArgsConstructor
 @Entity
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

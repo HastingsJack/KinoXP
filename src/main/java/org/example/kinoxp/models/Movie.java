@@ -27,7 +27,7 @@ public class Movie {
 
     private String title;
 
-    @Column(length = 500)
+    @Column(length = 1000)
     private String description;
     private Integer movieLength;
     private String movieImg;
