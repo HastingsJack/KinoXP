@@ -1,14 +1,18 @@
 package org.example.kinoxp.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import jakarta.validation.constraints.NotNull;
+import lombok.NoArgsConstructor;
 import org.example.kinoxp.models.enums.Role;
 
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserDto {
 
-    private Long id;
+    private Integer id;
 
     @NotNull(message = "Indtast et navn")
     private String name;

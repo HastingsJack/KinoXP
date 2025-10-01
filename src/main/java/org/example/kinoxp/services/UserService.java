@@ -19,8 +19,9 @@ public class UserService {
 
     public UserDto createUser(UserDto userDto){
         var user = userMapper.toUserModel(userDto);
+        var saved = userRepository.save(user);
         userRepository.save(user);
-        userDto.setId(user.getId());
+        userDto.setId(saved.getId());
 
         return userDto;
     }
