@@ -4,10 +4,13 @@ package org.example.kinoxp.models;
 // !!! This is what lombok does !!!
 // If you don't want lombok, you can remove this import
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 // Here we create setter and getter methods
@@ -18,9 +21,15 @@ import java.util.Set;
 @AllArgsConstructor
 // Here we create a no-args constructor
 // If needed, you can add this constructor
-//@NoArgsConstructor
+@NoArgsConstructor
+@Entity
 public class Actor {
+    @Id
     private Long id;
+
     private String name;
+
+    @ManyToMany(mappedBy = "actors")
     private Set<Movie> movies;
+
 }
