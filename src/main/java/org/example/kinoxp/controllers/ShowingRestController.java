@@ -1,8 +1,8 @@
-package org.example.kinoxp.controller;
+package org.example.kinoxp.controllers;
 
 
 import org.example.kinoxp.models.Showing;
-import org.example.kinoxp.repository.ShowingRepository;
+import org.example.kinoxp.repositories.ShowingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

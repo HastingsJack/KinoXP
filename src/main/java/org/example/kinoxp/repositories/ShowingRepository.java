@@ -1,4 +1,4 @@
-package org.example.kinoxp.repository;
+package org.example.kinoxp.repositories;
 
 import org.example.kinoxp.models.Showing;
 import org.springframework.data.jpa.repository.JpaRepository;

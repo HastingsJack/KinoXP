@@ -3,8 +3,11 @@ package org.example.kinoxp.models;
 // !!! This is what lombok does !!!
 // If you don't want lombok, you can remove this import
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Set;
@@ -17,8 +20,10 @@ import java.util.Set;
 @AllArgsConstructor
 // Here we create a no-args constructor
 // If needed, you can add this constructor
-//@NoArgsConstructor
+@NoArgsConstructor
+@Entity
 public class Screen {
+    @Id
     private Byte id;
     private String name;
     private Integer seatRows;

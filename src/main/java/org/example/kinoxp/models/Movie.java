@@ -1,7 +1,9 @@
 package org.example.kinoxp.models;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.kinoxp.models.enums.Genre;
 
@@ -18,14 +20,18 @@ import java.util.Set;
 @AllArgsConstructor
 // Here we create a no-args constructor
 // If needed, you can add this constructor
-//@NoArgsConstructor
+@Entity
+@NoArgsConstructor
 public class Movie {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Integer movieLength;
     private String movieImg;
     private Integer ageLimit;
     private String description;
+    @Enumerated(EnumType.STRING)
     private Set<Genre> genres;
     private Set<Actor> actors;
     private Set<Showing> showings;
