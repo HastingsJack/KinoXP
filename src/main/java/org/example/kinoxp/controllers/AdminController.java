@@ -33,8 +33,14 @@ public class AdminController {
             @PathVariable Integer id) {
 
         var response = userService.updateUser(id, request);
-        return ResponseEntity.ok((UserDto) response);
+        return ResponseEntity.ok( response);
 
+    }
+
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<UserDto> deleteUser(@PathVariable Integer id){
+        var response = userService.deleteUser(id);
+        return ResponseEntity.ok(( response));
     }
 
 

@@ -28,7 +28,7 @@ public class UserService {
         return userDto;
     }
 
-    public Object updateUser(Integer id, @Valid UserDto request) {
+    public UserDto updateUser(Integer id, @Valid UserDto request) {
         var user = userRepository.findById(id).orElse(null);
         if (user == null) {
             throw new UserNotFoundException("User not found");
@@ -38,5 +38,14 @@ public class UserService {
         userRepository.save(user);
 
         return request;
+    }
+
+    public UserDto deleteUser(Integer id) {
+        var user = userRepository.findById(id).orElse(null);
+        if (user == null) {
+            throw new UserNotFoundException("User not found");
+        }
+        userRepository.delete(user);
+        return userMapper.toUserDto(user);
     }
 }
