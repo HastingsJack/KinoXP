@@ -1,4 +1,6 @@
 package org.example.kinoxp.models.enums;
 
 public enum Role {
+    EMPLOYEE,
+    ADMIN,
 }
