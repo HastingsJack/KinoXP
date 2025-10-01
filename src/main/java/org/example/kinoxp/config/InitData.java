@@ -3,9 +3,13 @@ package org.example.kinoxp.config;
 
 import lombok.AllArgsConstructor;
 import org.example.kinoxp.models.Snack;
+import org.example.kinoxp.models.User;
 import org.example.kinoxp.repositories.SnackRepository;
+import org.example.kinoxp.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import static org.example.kinoxp.models.enums.Role.ADMIN;
 
 // Let's create a class that will be executed when the application starts
 // With the data we want to have in the database
@@ -13,6 +17,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @Component
 public class InitData implements CommandLineRunner {
+    private final UserRepository userRepository;
     SnackRepository snackRepository;
 
     @Override
@@ -32,5 +37,13 @@ public class InitData implements CommandLineRunner {
         snack2.setSnackImg("snack2.jpg");
         snack2.setDescription("Snack 2 description");
         snackRepository.save(snack2);
+
+        var user = new User();
+        user.setName("Admin1");
+        user.setPassword("password123");
+        user.setAge(99);
+        user.setEmail("adminEmail@email.com");
+        user.setRole(ADMIN);
+        userRepository.save(user);
     }
 }
