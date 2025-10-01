@@ -2,9 +2,11 @@ package org.example.kinoxp.config;
 
 
 import lombok.AllArgsConstructor;
+import org.example.kinoxp.models.Movie;
 import org.example.kinoxp.models.Snack;
 import org.example.kinoxp.models.User;
 import org.example.kinoxp.repositories.SnackRepository;
+import org.example.kinoxp.services.MovieService;
 import org.example.kinoxp.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -19,6 +21,7 @@ import static org.example.kinoxp.models.enums.Role.ADMIN;
 public class InitData implements CommandLineRunner {
     private final UserRepository userRepository;
     SnackRepository snackRepository;
+    MovieService movieService;
 
     @Override
     public void run(String... args) throws Exception {
@@ -37,6 +40,12 @@ public class InitData implements CommandLineRunner {
         snack2.setSnackImg("snack2.jpg");
         snack2.setDescription("Snack 2 description");
         snackRepository.save(snack2);
+
+        long[] movieIds = {617126, 1054867, 1387190, 1038392};
+
+        for (long movieId : movieIds) {
+            movieService.fetchAndSaveMovie(movieId);
+        }
 
         var user = new User();
         user.setName("Admin1");

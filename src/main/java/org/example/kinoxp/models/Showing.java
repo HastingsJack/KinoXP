@@ -7,6 +7,7 @@ import java.util.Set;
 // !!! This is what lombok does !!!
 // If you don't want lombok, you can remove this import
 
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,6 +29,7 @@ public class Showing {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private LocalDate date;
+    @ManyToOne
     private Movie movie;
     private Screen screen;
     private Period period;
