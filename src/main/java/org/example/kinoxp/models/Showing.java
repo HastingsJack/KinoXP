@@ -2,6 +2,7 @@ package org.example.kinoxp.models;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 // !!! This is what lombok does !!!
@@ -26,12 +27,9 @@ import lombok.Setter;
 public class Showing {
     private Long id;
     private Double price;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
-    private LocalDate date;
     @ManyToOne
     private Movie movie;
     private Screen screen;
-    private Period period;
     private Set<Ticket> tickets;
+    private List<TimeSlot> timeSlots;
 }
