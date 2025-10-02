@@ -43,5 +43,7 @@ public class Showing {
     @ManyToOne
     @JoinColumn(name = "period_id")
     private Period period;
+    @OneToMany(mappedBy = "showing", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Ticket> tickets;
+
 }

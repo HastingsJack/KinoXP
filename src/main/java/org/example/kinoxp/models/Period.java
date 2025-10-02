@@ -1,15 +1,13 @@
 package org.example.kinoxp.models;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 // !!! This is what lombok does !!!
 // If you don't want lombok, you can remove this import
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +29,8 @@ public class Period {
     private Long id;
     private LocalDate startDate;
     private Boolean ongoing;
-    private Set<Showing> showings;
+
+    @OneToMany(mappedBy = "period", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Showing> showings = new HashSet<>();
 
 }

@@ -30,5 +30,8 @@ public class SnackOrder {
 
     @OneToOne
     private Snack snack;
-    //private Ticket ticket;
+
+    @ManyToOne
+    @JoinColumn(name = "ticket_id") // FK to ticket table
+    private Ticket ticket;
 }

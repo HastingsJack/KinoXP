@@ -1,5 +1,5 @@
 package org.example.kinoxp.controllers;
-
+/*
 import org.example.kinoxp.models.Movie;
 import org.example.kinoxp.services.MovieService;
 import org.springframework.http.ResponseEntity;
@@ -24,3 +24,5 @@ public class MovieController {
         return ResponseEntity.ok(movie);
     }
 }
+
+*/

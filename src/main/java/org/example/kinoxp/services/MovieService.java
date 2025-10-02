@@ -15,7 +15,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.HashSet;
 import java.util.Set;
-
+/*
 @Service
 public class MovieService {
     private final MovieRepository movieRepository;
@@ -143,3 +143,4 @@ public class MovieService {
 
 
 }
+*/

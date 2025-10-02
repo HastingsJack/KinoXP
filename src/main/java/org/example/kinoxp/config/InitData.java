@@ -1,5 +1,5 @@
 package org.example.kinoxp.config;
-
+/*
 
 import lombok.AllArgsConstructor;
 import org.example.kinoxp.models.Movie;
@@ -43,3 +43,5 @@ public class InitData implements CommandLineRunner {
         }
     }
 }
+
+*/
