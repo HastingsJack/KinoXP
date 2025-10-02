@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -28,13 +29,14 @@ public class Movie {
 
     private String title;
 
-    @Column(length = 1000)
+    @Column(length = 500)
     private String description;
     private Integer movieLength;
-    private LocalDate releaseDate;
-    private LocalDate endDate;
     private String movieImg;
     private String ageLimit;
+    private LocalDate startDate;
+    private LocalDate endDate;
+
 
     @ElementCollection
     private Set<String> genres;

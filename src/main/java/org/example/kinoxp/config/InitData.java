@@ -2,6 +2,7 @@ package org.example.kinoxp.config;
 
 
 import lombok.AllArgsConstructor;
+import org.example.kinoxp.dto.ShowingPeriodDTO;
 import org.example.kinoxp.models.Movie;
 import org.example.kinoxp.models.Snack;
 import org.example.kinoxp.models.User;
@@ -10,6 +11,8 @@ import org.example.kinoxp.services.MovieService;
 import org.example.kinoxp.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
 
 import static org.example.kinoxp.models.enums.Role.ADMIN;
 
@@ -42,9 +45,14 @@ public class InitData implements CommandLineRunner {
         snackRepository.save(snack2);
 
         long[] movieIds = {617126, 1054867, 1387190, 1038392};
+        ShowingPeriodDTO dto = new ShowingPeriodDTO();
+        LocalDate today = LocalDate.now();
+        LocalDate future = today.plusDays(20);
+        dto.setStartDate(today);
+        dto.setEndDate(future);
 
         for (long movieId : movieIds) {
-            movieService.fetchAndSaveMovie(movieId);
+            movieService.fetchAndSaveMovie(movieId, dto);
         }
 
         var user = new User();
