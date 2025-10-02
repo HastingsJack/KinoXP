@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 // !!! This is what lombok does !!!
@@ -30,6 +31,8 @@ public class Movie {
     @Column(length = 1000)
     private String description;
     private Integer movieLength;
+    private LocalDate releaseDate;
+    private LocalDate endDate;
     private String movieImg;
     private String ageLimit;
 
@@ -44,5 +47,6 @@ public class Movie {
     )
     private Set<Actor> actors;
 
+    //private List<TimeSlot> timeSlots;
     //private Set<Showing> showings;
 }

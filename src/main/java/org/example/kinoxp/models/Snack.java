@@ -39,4 +39,6 @@ public class Snack {
     @ManyToOne
     @JoinColumn(name = "snackOrder_id")
     private SnackOrder snackOrder;
+
+
 }
