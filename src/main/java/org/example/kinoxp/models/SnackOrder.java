@@ -30,5 +30,6 @@ public class SnackOrder {
 
     @OneToOne
     private Snack snack;
-    //private Ticket ticket;
+    @ManyToOne
+    private Ticket ticket;
 }

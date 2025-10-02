@@ -1,5 +1,6 @@
 package org.example.kinoxp.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,6 +37,7 @@ public class Movie {
     @ElementCollection
     private Set<String> genres;
 
+    @JsonBackReference
     @ManyToMany
     @JoinTable(
             name = "movie_actor",

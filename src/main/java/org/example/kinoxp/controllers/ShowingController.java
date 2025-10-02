@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("showings")
+@RestController()
+@RequestMapping("/showings")
 @CrossOrigin("*")
 public class ShowingController {
 
@@ -16,8 +17,9 @@ public class ShowingController {
     ShowingRepository showingRepository;
 
     //create
-    @PatchMapping
+    @PostMapping()
     public Showing create(@RequestBody Showing showing) {
+        System.out.println("hello from showing create");
         return showingRepository.save(showing);
     }
 
