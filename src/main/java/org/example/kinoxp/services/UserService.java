@@ -5,7 +5,11 @@ import org.example.kinoxp.dto.UserDto;
 import org.example.kinoxp.exceptions.UserNotFoundException;
 import org.example.kinoxp.mappers.UserMapper;
 import org.example.kinoxp.repositories.UserRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -47,5 +51,18 @@ public class UserService {
         }
         userRepository.delete(user);
         return userMapper.toUserDto(user);
+    }
+
+    public List<UserDto> getAllUserDto() {
+        var users = userRepository.findAll();
+        var userDtos = new ArrayList<UserDto>();
+        for (var user : users) {
+            var userDtoTemp = userMapper.toUserDto(user);
+            userDtos.add(userDtoTemp);
+        }
+        if (users.isEmpty()) {
+            throw new UserNotFoundException("Users not found");
+        }
+        return userDtos;
     }
 }

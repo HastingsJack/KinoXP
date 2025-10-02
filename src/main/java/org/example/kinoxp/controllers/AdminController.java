@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
@@ -17,6 +19,14 @@ public class AdminController {
     public AdminController(UserService userService) {
         this.userService = userService;
     }
+
+
+    @GetMapping("/users")
+    public List<UserDto> getUsers() {
+        var userDtos = userService.getAllUserDto();
+        return userDtos;
+    }
+
 
     @PostMapping("/create")
     public ResponseEntity<UserDto> createUser(
