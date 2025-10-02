@@ -44,5 +44,6 @@ public class Movie {
     )
     private Set<Actor> actors;
 
+    //private List<TimeSlot> timeSlots;
     //private Set<Showing> showings;
 }

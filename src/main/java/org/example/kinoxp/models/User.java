@@ -20,7 +20,7 @@ import java.util.List;
 // Here we create a constructor
 @AllArgsConstructor
 // Here we create a no-args constructor
-// If needed, you can add this constructor
+// If needed,    you can add this constructor
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
