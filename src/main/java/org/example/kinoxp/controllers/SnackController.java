@@ -15,6 +15,7 @@ import java.util.Map;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/snacks")
+@CrossOrigin("*")
 public class SnackController {
     SnackService snackService;
 
@@ -41,6 +42,12 @@ public class SnackController {
         var response = snackService.updateSnack(id, request);
 
         return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteSnack(@PathVariable Integer id){
+        snackService.deleteSnack(id);
+        return ResponseEntity.noContent().build();
     }
 
     // I create this locally because it's only this controller that needs it.

@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Setter
 @Getter
-public class ShowingPeriodDTO {
+public class ShowingPeriodDto {
     private LocalDate startDate;
     private LocalDate endDate;
 
