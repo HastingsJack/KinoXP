@@ -20,14 +20,22 @@ public class AdminController {
         this.userService = userService;
     }
 
-
+    @CrossOrigin
     @GetMapping("/users")
     public List<UserDto> getUsers() {
         var userDtos = userService.getAllUserDto();
         return userDtos;
     }
 
+    @CrossOrigin
+    @GetMapping("users/{id}")
+    public UserDto getUser(@PathVariable Integer id) {
+        var userDto = userService.getUser(id);
+        return userDto;
+    }
 
+
+    @CrossOrigin(origins = "*")
     @PostMapping("/create")
     public ResponseEntity<UserDto> createUser(
             @Valid @RequestBody UserDto request) {
@@ -37,6 +45,7 @@ public class AdminController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @CrossOrigin(origins = "*")
     @PutMapping("/update/{id}")
     public ResponseEntity<UserDto> updateUser(
             @Valid @RequestBody UserDto request,
@@ -47,6 +56,7 @@ public class AdminController {
 
     }
 
+    @CrossOrigin(origins = "*")
     @DeleteMapping("delete/{id}")
     public ResponseEntity<UserDto> deleteUser(@PathVariable Integer id){
         var response = userService.deleteUser(id);
