@@ -4,6 +4,7 @@ package org.example.kinoxp.models;
 // !!! This is what lombok does !!!
 // If you don't want lombok, you can remove this import
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,6 +30,7 @@ public class Actor {
     private String name;
 
     @ManyToMany(mappedBy = "actors")
+    @JsonIgnore
     private Set<Movie> movies;
 
 }

@@ -6,6 +6,8 @@ import org.example.kinoxp.services.MovieService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/movies")
@@ -25,5 +27,10 @@ public class MovieController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(movie);
+    }
+
+    @GetMapping("/active")
+    public Set<Movie> fetchActiveMovies() {
+        return movieService.getActiveMovies();
     }
 }
