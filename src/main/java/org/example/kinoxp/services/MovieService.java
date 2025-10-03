@@ -2,6 +2,7 @@ package org.example.kinoxp.services;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.kinoxp.dto.ShowingPeriodDto;
 import org.example.kinoxp.models.Actor;
 import org.example.kinoxp.models.Movie;
 import org.example.kinoxp.repositories.ActorRepository;
@@ -29,13 +30,12 @@ public class MovieService {
 
     }
 
-    public Movie fetchAndSaveMovie(long movieId) {
+    public Movie fetchAndSaveMovie(long movieId, ShowingPeriodDto showingPeriod) {
         String url = "https://api.themoviedb.org/3/movie/" + movieId + "?api_key=" + apiKey + "&language=en-US";
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).GET().build();
 
         try {
-
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             ObjectMapper mapper = new ObjectMapper();
             JsonNode json = mapper.readTree(response.body());
@@ -49,7 +49,8 @@ public class MovieService {
             movie.setDescription(json.get("overview").asText());
             movie.setMovieLength(json.get("runtime").asInt());
             movie.setMovieImg("https://image.tmdb.org/t/p/w500" + json.get("backdrop_path").asText());
-
+            movie.setStartDate(showingPeriod.getStartDate());
+            movie.setEndDate(showingPeriod.getEndDate());
 
             Set<String> genres = new HashSet<>();
             json.get("genres").forEach(g -> genres.add(g.get("name").asText()));
@@ -119,17 +120,23 @@ public class MovieService {
             JsonNode json = mapper.readTree(response.body());
 
             Set<Actor> actors = new HashSet<>();
-            json.get("cast").forEach(node -> {
+            int count = 0;
+
+            for(JsonNode node : json.get("cast")) {
+                if(count >= 15) {
+                    break;
+                }
                 long actorID = node.get("id").asLong();
                 Actor actor = actorRepository.findById(actorID)
-                                .orElseGet(() -> {
-                                    Actor newActor = new Actor();
-                                    newActor.setId(actorID);
-                                    newActor.setName(node.get("name").asText());
-                                    return newActor;
-                                        });
+                        .orElseGet(() -> {
+                            Actor newActor = new Actor();
+                            newActor.setId(actorID);
+                            newActor.setName(node.get("name").asText());
+                            return newActor;
+                        });
                 actors.add(actor);
-            });
+                count++;
+            }
 
             actorRepository.saveAll(actors);
 

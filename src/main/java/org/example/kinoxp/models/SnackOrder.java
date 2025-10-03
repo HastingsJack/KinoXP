@@ -28,7 +28,9 @@ public class SnackOrder {
     @Column(name = "quantity")
     private Integer quantity;
 
+    //private Ticket ticket;
+
     @OneToOne
     private Snack snack;
-    //private Ticket ticket;
+
 }

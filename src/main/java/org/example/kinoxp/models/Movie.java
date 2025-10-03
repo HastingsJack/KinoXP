@@ -28,13 +28,14 @@ public class Movie {
 
     private String title;
 
-    @Column(length = 1000)
+    @Column(length = 500)
     private String description;
     private Integer movieLength;
-    private LocalDate releaseDate;
-    private LocalDate endDate;
     private String movieImg;
     private String ageLimit;
+    private LocalDate startDate;
+    private LocalDate endDate;
+
 
     @ElementCollection
     private Set<String> genres;
@@ -47,6 +48,5 @@ public class Movie {
     )
     private Set<Actor> actors;
 
-    //private List<TimeSlot> timeSlots;
     //private Set<Showing> showings;
 }
