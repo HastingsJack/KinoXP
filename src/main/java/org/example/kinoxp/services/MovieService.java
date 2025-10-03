@@ -14,7 +14,9 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -31,6 +33,14 @@ public class MovieService {
     }
 
     public Movie fetchAndSaveMovie(long movieId, ShowingPeriodDto showingPeriod) {
+        Optional<Movie> existing = movieRepository.findById(movieId);
+        if (existing.isPresent()) {
+            Movie movie = existing.get();
+            movie.setStartDate(showingPeriod.getStartDate());
+            movie.setEndDate(showingPeriod.getEndDate());
+            return movieRepository.save(movie);
+        }
+
         String url = "https://api.themoviedb.org/3/movie/" + movieId + "?api_key=" + apiKey + "&language=en-US";
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).GET().build();
@@ -48,7 +58,7 @@ public class MovieService {
             movie.setTitle(json.get("title").asText());
             movie.setDescription(json.get("overview").asText());
             movie.setMovieLength(json.get("runtime").asInt());
-            movie.setMovieImg("https://image.tmdb.org/t/p/w500" + json.get("backdrop_path").asText());
+            movie.setMovieImg("https://image.tmdb.org/t/p/original" + json.get("backdrop_path").asText());
             movie.setStartDate(showingPeriod.getStartDate());
             movie.setEndDate(showingPeriod.getEndDate());
 
@@ -148,5 +158,8 @@ public class MovieService {
         }
     }
 
+    public Set<Movie> getActiveMovies() {
+        return movieRepository.findByEndDateAfter(LocalDate.now());
+    }
 
 }
