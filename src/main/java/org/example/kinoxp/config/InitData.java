@@ -2,8 +2,7 @@ package org.example.kinoxp.config;
 
 
 import lombok.AllArgsConstructor;
-import org.example.kinoxp.dto.ShowingPeriodDTO;
-import org.example.kinoxp.models.Movie;
+import org.example.kinoxp.dto.ShowingPeriodDto;
 import org.example.kinoxp.models.Snack;
 import org.example.kinoxp.models.User;
 import org.example.kinoxp.repositories.SnackRepository;
@@ -45,7 +44,7 @@ public class InitData implements CommandLineRunner {
         snackRepository.save(snack2);
 
         long[] movieIds = {617126, 1054867, 1387190, 1038392};
-        ShowingPeriodDTO dto = new ShowingPeriodDTO();
+        ShowingPeriodDto dto = new ShowingPeriodDto();
         LocalDate today = LocalDate.now();
         LocalDate future = today.plusDays(20);
         dto.setStartDate(today);

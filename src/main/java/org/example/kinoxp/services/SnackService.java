@@ -40,4 +40,11 @@ public class SnackService {
 
         return request;
     }
+
+    public void deleteSnack(Integer id) {
+        var snack = snackRepository.findById(id).orElse(null);
+        if(snack == null) throw new SnackNotFoundException();
+
+        snackRepository.delete(snack);
+    }
 }

@@ -27,9 +27,11 @@ import lombok.Setter;
 public class Showing {
     private Long id;
     private Double price;
+    private LocalDate date;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
     @ManyToOne
     private Movie movie;
     private Screen screen;
     private Set<Ticket> tickets;
-    private List<TimeSlot> timeSlots;
 }

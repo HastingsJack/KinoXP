@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -49,6 +48,5 @@ public class Movie {
     )
     private Set<Actor> actors;
 
-    //private List<TimeSlot> timeSlots;
     //private Set<Showing> showings;
 }
