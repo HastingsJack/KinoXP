@@ -64,4 +64,10 @@ public class UserService {
         }
         return userDtos;
     }
+
+    public UserDto getUser(Integer id) {
+        var user = userRepository.findById(id).orElse(null);
+        var userDto = userMapper.toUserDto(user);
+        return userDto;
+    }
 }
