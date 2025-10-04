@@ -8,6 +8,7 @@ import java.time.LocalTime;
 
 @Data
 public class RegisterShowingDto {
+    private Long id;
     @NotNull(message = "Indtast en pris")
     private Double price;
     @NotNull(message = "Indtast en dato")

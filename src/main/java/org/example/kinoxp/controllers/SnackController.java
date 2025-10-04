@@ -35,7 +35,9 @@ public class SnackController {
 
     @PutMapping("/{id}")
     public ResponseEntity<SnackDto> updateSnack(
-            @PathVariable Integer id,
+            // Adding name is optional but recommended.
+            // Now the name is consistent with the name in the URL.
+            @PathVariable(name = "id") Integer id,
             // @Valid is used to validate the request body.
             // From the annotation in SnackDto
             @Valid @RequestBody SnackDto request) {
@@ -45,7 +47,10 @@ public class SnackController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteSnack(@PathVariable Integer id){
+    public ResponseEntity<Void> deleteSnack(
+            // Adding name is optional but recommended.
+            // Now the name is consistent with the name in the URL.
+            @PathVariable(name = "id") Integer id){
         snackService.deleteSnack(id);
         return ResponseEntity.noContent().build();
     }
