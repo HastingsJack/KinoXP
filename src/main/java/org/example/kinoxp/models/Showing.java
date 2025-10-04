@@ -34,10 +34,12 @@ public class Showing {
     private LocalTime startTime;
     private LocalTime endTime;
     // Using merge, when the data already exists, it will be updated.
+    // Using persist, when the data is new, it will be created.
     @ManyToOne(cascade = CascadeType.MERGE)
     private Movie movie;
+    // Using merge, when the data already exists, it will be updated.
     // Using persist, when the data is new, it will be created.
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Screen screen;
     @OneToMany(mappedBy = "showing")
     private Set<Ticket> tickets;

@@ -1,8 +1,11 @@
 package org.example.kinoxp.controllers;
 
 import lombok.AllArgsConstructor;
+import org.example.kinoxp.dtos.showingDtos.RegisterShowingDto;
 import org.example.kinoxp.dtos.showingDtos.ShowingDto;
 import org.example.kinoxp.services.ShowingService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,5 +27,10 @@ public class ShowingController {
         return showingService.getAll(movieId);
     }
 
+    @PostMapping
+    public ResponseEntity<ShowingDto> createShowing(@RequestBody RegisterShowingDto request){
+        var showingDto = showingService.createShowing(request);
 
+        return ResponseEntity.status(HttpStatus.CREATED).body(showingDto);
+    }
 }

@@ -7,6 +7,7 @@ import org.example.kinoxp.models.Screen;
 import org.example.kinoxp.models.Showing;
 import org.example.kinoxp.models.Snack;
 import org.example.kinoxp.models.User;
+import org.example.kinoxp.repositories.ScreenRepository;
 import org.example.kinoxp.repositories.ShowingRepository;
 import org.example.kinoxp.repositories.SnackRepository;
 import org.example.kinoxp.services.MovieService;
@@ -18,6 +19,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static org.example.kinoxp.models.enums.Role.ADMIN;
 
@@ -31,6 +33,7 @@ public class InitData implements CommandLineRunner {
     private final SnackRepository snackRepository;
     private final MovieService movieService;
     private final ShowingRepository showingRepository;
+    private final ScreenRepository screenRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -50,6 +53,20 @@ public class InitData implements CommandLineRunner {
         snack2.setDescription("Snack 2 description");
         snackRepository.save(snack2);
 
+        List<Screen> screens = new ArrayList<>();
+        Screen big = new Screen();
+        big.setName("Big");
+        big.setSeatRows(25);
+        big.setSeatColumns(16);
+        screens.add(big);
+
+        Screen small = new Screen();
+        small.setName("Small");
+        small.setSeatRows(20);
+        small.setSeatColumns(12);
+        screens.add(small);
+        screenRepository.saveAll(screens);
+
         long[] movieIds = {617126, 1054867, 1387190, 1038392};
         MoviePeriodDto dto = new MoviePeriodDto();
         LocalDate today = LocalDate.now();
@@ -58,6 +75,8 @@ public class InitData implements CommandLineRunner {
         dto.setEndDate(future);
 
         List<Showing> showings = new ArrayList<>();
+
+        var random = new Random();
         for (long movieId : movieIds) {
             var movie = movieService.fetchAndSaveMovie(movieId, dto);
 
@@ -68,11 +87,7 @@ public class InitData implements CommandLineRunner {
             showing.setStartTime(LocalTime.now());
             showing.setEndTime(LocalTime.now().plusHours(2));
 
-            Screen screen = new Screen();
-            screen.setName("Smallest");
-            screen.setSeatRows(20);
-            screen.setSeatColumns(12);
-            showing.setScreen(screen);
+            showing.setScreen(screens.get(random.nextInt(screens.size())));
             showings.add(showing);
         }
 
@@ -86,7 +101,5 @@ public class InitData implements CommandLineRunner {
         user.setEmail("adminEmail@email.com");
         user.setRole(ADMIN);
         userRepository.save(user);
-
-
     }
 }

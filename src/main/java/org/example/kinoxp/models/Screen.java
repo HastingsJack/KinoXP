@@ -29,6 +29,4 @@ public class Screen {
     private String name;
     private Integer seatRows;
     private Integer seatColumns;
-//    @OneToMany(mappedBy = "screen")
-//    private Set<Showing> showings;
 }

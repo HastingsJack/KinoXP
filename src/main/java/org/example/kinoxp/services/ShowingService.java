@@ -1,6 +1,7 @@
 package org.example.kinoxp.services;
 
 import lombok.AllArgsConstructor;
+import org.example.kinoxp.dtos.showingDtos.RegisterShowingDto;
 import org.example.kinoxp.dtos.showingDtos.ShowingDto;
 import org.example.kinoxp.mappers.ShowingMapper;
 import org.example.kinoxp.models.Showing;
@@ -24,5 +25,12 @@ public class ShowingService {
 
         // Maps all Showing objects to ShowingDto objects
         return  showings.stream().map(showingMapper::toDto).toList();
+    }
+
+    public ShowingDto createShowing(RegisterShowingDto request) {
+        var showing = showingMapper.toModel(request);
+        showingRepository.save(showing);
+
+        return showingMapper.toDto(showing);
     }
 }
