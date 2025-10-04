@@ -1,7 +1,7 @@
 package org.example.kinoxp.controllers;
 
 import jakarta.validation.Valid;
-import org.example.kinoxp.dto.UserDto;
+import org.example.kinoxp.dtos.UserDto;
 import org.example.kinoxp.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

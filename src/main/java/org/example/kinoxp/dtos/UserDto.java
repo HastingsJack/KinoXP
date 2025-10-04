@@ -1,4 +1,4 @@
-package org.example.kinoxp.dto;
+package org.example.kinoxp.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

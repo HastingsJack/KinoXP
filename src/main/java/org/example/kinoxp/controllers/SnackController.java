@@ -2,7 +2,7 @@ package org.example.kinoxp.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.example.kinoxp.dto.SnackDto;
+import org.example.kinoxp.dtos.SnackDto;
 import org.example.kinoxp.exceptions.SnackNotFoundException;
 import org.example.kinoxp.services.SnackService;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ import java.util.Map;
 @RequestMapping("/snacks")
 @CrossOrigin("*")
 public class SnackController {
-    SnackService snackService;
+    private final SnackService snackService;
 
     @GetMapping
     public List<SnackDto> getAll() {

@@ -1,7 +1,6 @@
 package org.example.kinoxp.mappers;
 
-import jakarta.validation.Valid;
-import org.example.kinoxp.dto.UserDto;
+import org.example.kinoxp.dtos.UserDto;
 import org.example.kinoxp.models.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;

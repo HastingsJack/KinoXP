@@ -2,7 +2,7 @@ package org.example.kinoxp.config;
 
 
 import lombok.AllArgsConstructor;
-import org.example.kinoxp.dto.ShowingPeriodDto;
+import org.example.kinoxp.dtos.MoviePeriodDto;
 import org.example.kinoxp.models.Screen;
 import org.example.kinoxp.models.Showing;
 import org.example.kinoxp.models.Snack;
@@ -16,6 +16,8 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.example.kinoxp.models.enums.Role.ADMIN;
 
@@ -49,31 +51,33 @@ public class InitData implements CommandLineRunner {
         snackRepository.save(snack2);
 
         long[] movieIds = {617126, 1054867, 1387190, 1038392};
-        ShowingPeriodDto dto = new ShowingPeriodDto();
+        MoviePeriodDto dto = new MoviePeriodDto();
         LocalDate today = LocalDate.now();
         LocalDate future = today.plusDays(20);
         dto.setStartDate(today);
         dto.setEndDate(future);
 
-        var showing = new Showing();
-
+        List<Showing> showings = new ArrayList<>();
         for (long movieId : movieIds) {
             var movie = movieService.fetchAndSaveMovie(movieId, dto);
+
+            var showing = new Showing();
             showing.setMovie(movie);
+            showing.setPrice(10.0);
+            showing.setDate(LocalDate.now());
+            showing.setStartTime(LocalTime.now());
+            showing.setEndTime(LocalTime.now().plusHours(2));
+
+            Screen screen = new Screen();
+            screen.setName("Smallest");
+            screen.setSeatRows(20);
+            screen.setSeatColumns(12);
+            showing.setScreen(screen);
+            showings.add(showing);
         }
 
-        showing.setPrice(10.0);
-        showing.setDate(LocalDate.now());
-        showing.setStartTime(LocalTime.now());
-        showing.setEndTime(LocalTime.now().plusHours(2));
 
-        Screen screen = new Screen();
-        screen.setName("Smallest");
-        screen.setSeatRows(20);
-        screen.setSeatColumns(12);
-        showing.setScreen(screen);
-
-        showingRepository.save(showing);
+        showingRepository.saveAll(showings);
 
         var user = new User();
         user.setName("Admin1");

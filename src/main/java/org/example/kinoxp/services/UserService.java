@@ -1,11 +1,10 @@
 package org.example.kinoxp.services;
 
 import jakarta.validation.Valid;
-import org.example.kinoxp.dto.UserDto;
+import org.example.kinoxp.dtos.UserDto;
 import org.example.kinoxp.exceptions.UserNotFoundException;
 import org.example.kinoxp.mappers.UserMapper;
 import org.example.kinoxp.repositories.UserRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
