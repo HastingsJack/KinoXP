@@ -1,8 +1,10 @@
 package org.example.kinoxp.controllers;
 
 
+import org.example.kinoxp.dto.ShowingDto;
 import org.example.kinoxp.models.Showing;
 import org.example.kinoxp.repositories.ShowingRepository;
+import org.example.kinoxp.services.ShowingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +15,15 @@ import java.util.List;
 @CrossOrigin("*")
 public class ShowingController {
 
+    private final ShowingService showingService;
+
     @Autowired
     ShowingRepository showingRepository;
+
+
+    public ShowingController(ShowingService showingService) {
+        this.showingService = showingService;
+    }
 
     //create
     @PostMapping()
@@ -27,6 +36,11 @@ public class ShowingController {
     @GetMapping("/all")
     public List<Showing> findAll() {
         return showingRepository.findAll();
+    }
+
+    @GetMapping("/all/dto")
+    public List<ShowingDto> findAllDto() {
+        return showingService.getAllShowings();
     }
 
     @GetMapping("/{id}")
