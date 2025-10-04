@@ -48,5 +48,6 @@ public class Movie {
     )
     private Set<Actor> actors;
 
-    //private Set<Showing> showings;
+    @OneToMany(mappedBy = "movie")
+    private Set<Showing> showings;
 }

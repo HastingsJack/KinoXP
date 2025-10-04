@@ -2,7 +2,7 @@ package org.example.kinoxp.services;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.kinoxp.dto.ShowingPeriodDto;
+import org.example.kinoxp.dtos.MoviePeriodDto;
 import org.example.kinoxp.models.Actor;
 import org.example.kinoxp.models.Movie;
 import org.example.kinoxp.repositories.ActorRepository;
@@ -32,7 +32,7 @@ public class MovieService {
 
     }
 
-    public Movie fetchAndSaveMovie(long movieId, ShowingPeriodDto showingPeriod) {
+    public Movie fetchAndSaveMovie(long movieId, MoviePeriodDto showingPeriod) {
         Optional<Movie> existing = movieRepository.findById(movieId);
         if (existing.isPresent()) {
             Movie movie = existing.get();

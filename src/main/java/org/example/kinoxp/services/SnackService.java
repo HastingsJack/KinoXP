@@ -1,7 +1,7 @@
 package org.example.kinoxp.services;
 
 import lombok.AllArgsConstructor;
-import org.example.kinoxp.dto.SnackDto;
+import org.example.kinoxp.dtos.SnackDto;
 import org.example.kinoxp.exceptions.SnackNotFoundException;
 import org.example.kinoxp.mappers.SnackMapper;
 import org.example.kinoxp.repositories.SnackRepository;

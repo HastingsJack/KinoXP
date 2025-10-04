@@ -28,7 +28,8 @@ public class SnackOrder {
     @Column(name = "quantity")
     private Integer quantity;
 
-    //private Ticket ticket;
+    @ManyToOne
+    private Ticket ticket;
 
     @OneToOne
     private Snack snack;
