@@ -3,8 +3,11 @@ package org.example.kinoxp.config;
 
 import lombok.AllArgsConstructor;
 import org.example.kinoxp.dto.ShowingPeriodDto;
+import org.example.kinoxp.models.Screen;
+import org.example.kinoxp.models.Showing;
 import org.example.kinoxp.models.Snack;
 import org.example.kinoxp.models.User;
+import org.example.kinoxp.repositories.ShowingRepository;
 import org.example.kinoxp.repositories.SnackRepository;
 import org.example.kinoxp.services.MovieService;
 import org.example.kinoxp.repositories.UserRepository;
@@ -12,6 +15,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import static org.example.kinoxp.models.enums.Role.ADMIN;
 
@@ -22,8 +26,9 @@ import static org.example.kinoxp.models.enums.Role.ADMIN;
 @Component
 public class InitData implements CommandLineRunner {
     private final UserRepository userRepository;
-    SnackRepository snackRepository;
-    MovieService movieService;
+    private final SnackRepository snackRepository;
+    private final MovieService movieService;
+    private final ShowingRepository showingRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -50,9 +55,25 @@ public class InitData implements CommandLineRunner {
         dto.setStartDate(today);
         dto.setEndDate(future);
 
+        var showing = new Showing();
+
         for (long movieId : movieIds) {
-            movieService.fetchAndSaveMovie(movieId, dto);
+            var movie = movieService.fetchAndSaveMovie(movieId, dto);
+            showing.setMovie(movie);
         }
+
+        showing.setPrice(10.0);
+        showing.setDate(LocalDate.now());
+        showing.setStartTime(LocalTime.now());
+        showing.setEndTime(LocalTime.now().plusHours(2));
+
+        Screen screen = new Screen();
+        screen.setName("Smallest");
+        screen.setSeatRows(20);
+        screen.setSeatColumns(12);
+        showing.setScreen(screen);
+
+        showingRepository.save(showing);
 
         var user = new User();
         user.setName("Admin1");
@@ -61,5 +82,7 @@ public class InitData implements CommandLineRunner {
         user.setEmail("adminEmail@email.com");
         user.setRole(ADMIN);
         userRepository.save(user);
+
+
     }
 }
