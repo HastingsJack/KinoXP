@@ -1,7 +1,6 @@
-package org.example.kinoxp.dtos;
+package org.example.kinoxp.dtos.ticketDtos;
 
 
-import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +17,7 @@ public class TicketDto {
     private String customerEmail;
     private String customerName;
     private String seat;
-    private List<SnackOrder> snackOrders;
+    private List<TicketSnackOrderDto> snackOrders;
     private Showing showing;
 
 }

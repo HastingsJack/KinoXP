@@ -13,6 +13,9 @@ import org.example.kinoxp.repositories.ScreenRepository;
 import org.example.kinoxp.repositories.ShowingRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -32,6 +35,24 @@ public class ShowingService {
 
         // Maps all Showing objects to ShowingDto objects
         return  showings.stream().map(showingMapper::toDto).toList();
+    }
+
+    public List<ShowingDto> getUpcoming(LocalDate date){
+        List<Showing> allShowings;
+        List<Showing> upcomingShowings = new ArrayList<>();
+
+        if (date == null){
+            date = LocalDate.now();
+        }
+        allShowings = showingRepository.findAll();
+        for(Showing showing : allShowings){
+            if(showing.getDate().isAfter(date)){
+                upcomingShowings.add(showing);
+            }
+        }
+
+        return  upcomingShowings.stream().map(showingMapper::toDto).toList();
+
     }
 
     public ShowingDto createShowing(RegisterShowingDto request) {
