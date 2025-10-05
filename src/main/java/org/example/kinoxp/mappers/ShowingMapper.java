@@ -9,7 +9,7 @@ import org.mapstruct.*;
 public interface ShowingMapper {
 
     ShowingDto toDto(Showing showing);
-    // When you got a List in your DTO. You need to map it to the list from your DTO model
+    // When you got a List in your DTO. You need to map it to the list from your DTO to model
     ShowingTicketDto toTicketDto(Ticket ticket);
 
     Showing toModel(RegisterShowingDto request);
