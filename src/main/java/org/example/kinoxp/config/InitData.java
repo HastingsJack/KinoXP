@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 
 import static org.example.kinoxp.models.enums.Role.ADMIN;
+import static org.example.kinoxp.models.enums.Role.EMPLOYEE;
 
 // Let's create a class that will be executed when the application starts
 // With the data we want to have in the database
@@ -61,5 +62,30 @@ public class InitData implements CommandLineRunner {
         user.setEmail("adminEmail@email.com");
         user.setRole(ADMIN);
         userRepository.save(user);
+
+        var user2 = new User();
+        user2.setName("Employee1");
+        user2.setPassword("password123");
+        user2.setAge(23);
+        user2.setEmail("Employee1Email@email.com");
+        user2.setRole(EMPLOYEE);
+        userRepository.save(user2);
+
+        var user3 = new User();
+        user3.setName("Employee2");
+        user3.setPassword("password123");
+        user3.setAge(34);
+        user3.setEmail("hello@email.com");
+        user3.setRole(EMPLOYEE);
+        userRepository.save(user3);
+
+        var user4 = new User();
+        user4.setName("Employee3");
+        user4.setPassword("ilikecats321");
+        user4.setAge(43);
+        user4.setEmail("meow@email.com");
+        user4.setRole(EMPLOYEE);
+        userRepository.save(user4);
+
     }
 }
