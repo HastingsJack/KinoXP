@@ -1,10 +1,12 @@
 package org.example.kinoxp.controllers;
 
-import org.example.kinoxp.dto.ShowingPeriodDto;
+import org.example.kinoxp.dtos.MoviePeriodDto;
 import org.example.kinoxp.models.Movie;
 import org.example.kinoxp.services.MovieService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 @RestController
 @CrossOrigin("*")
@@ -19,11 +21,16 @@ public class MovieController {
     @PostMapping("/{id}")
     public ResponseEntity<Movie> fetchMovie(
             @PathVariable long id,
-            @RequestBody ShowingPeriodDto showingPeriod) {
+            @RequestBody MoviePeriodDto showingPeriod) {
         Movie movie = movieService.fetchAndSaveMovie(id, showingPeriod);
         if (movie == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(movie);
+    }
+
+    @GetMapping("/active")
+    public Set<Movie> fetchActiveMovies() {
+        return movieService.getActiveMovies();
     }
 }

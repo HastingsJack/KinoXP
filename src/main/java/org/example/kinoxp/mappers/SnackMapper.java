@@ -1,6 +1,6 @@
 package org.example.kinoxp.mappers;
 
-import org.example.kinoxp.dto.SnackDto;
+import org.example.kinoxp.dtos.SnackDto;
 import org.example.kinoxp.models.Snack;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;

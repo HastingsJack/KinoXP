@@ -1,8 +1,6 @@
 package org.example.kinoxp.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import org.example.kinoxp.dto.UserDto;
-import org.example.kinoxp.mappers.UserMapper;
+import org.example.kinoxp.dtos.UserDto;
 import org.example.kinoxp.models.enums.Role;
 import org.example.kinoxp.services.UserService;
 import org.junit.jupiter.api.Test;

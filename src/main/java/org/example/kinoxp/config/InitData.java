@@ -2,9 +2,13 @@ package org.example.kinoxp.config;
 
 
 import lombok.AllArgsConstructor;
-import org.example.kinoxp.dto.ShowingPeriodDto;
+import org.example.kinoxp.dtos.MoviePeriodDto;
+import org.example.kinoxp.models.Screen;
+import org.example.kinoxp.models.Showing;
 import org.example.kinoxp.models.Snack;
 import org.example.kinoxp.models.User;
+import org.example.kinoxp.repositories.ScreenRepository;
+import org.example.kinoxp.repositories.ShowingRepository;
 import org.example.kinoxp.repositories.SnackRepository;
 import org.example.kinoxp.services.MovieService;
 import org.example.kinoxp.repositories.UserRepository;
@@ -12,6 +16,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import static org.example.kinoxp.models.enums.Role.ADMIN;
 import static org.example.kinoxp.models.enums.Role.EMPLOYEE;
@@ -23,8 +31,10 @@ import static org.example.kinoxp.models.enums.Role.EMPLOYEE;
 @Component
 public class InitData implements CommandLineRunner {
     private final UserRepository userRepository;
-    SnackRepository snackRepository;
-    MovieService movieService;
+    private final SnackRepository snackRepository;
+    private final MovieService movieService;
+    private final ShowingRepository showingRepository;
+    private final ScreenRepository screenRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -44,16 +54,46 @@ public class InitData implements CommandLineRunner {
         snack2.setDescription("Snack 2 description");
         snackRepository.save(snack2);
 
+        List<Screen> screens = new ArrayList<>();
+        Screen big = new Screen();
+        big.setName("Big");
+        big.setSeatRows(25);
+        big.setSeatColumns(16);
+        screens.add(big);
+
+        Screen small = new Screen();
+        small.setName("Small");
+        small.setSeatRows(20);
+        small.setSeatColumns(12);
+        screens.add(small);
+        screenRepository.saveAll(screens);
+
         long[] movieIds = {617126, 1054867, 1387190, 1038392};
-        ShowingPeriodDto dto = new ShowingPeriodDto();
+        MoviePeriodDto dto = new MoviePeriodDto();
         LocalDate today = LocalDate.now();
         LocalDate future = today.plusDays(20);
         dto.setStartDate(today);
         dto.setEndDate(future);
 
+        List<Showing> showings = new ArrayList<>();
+
+        var random = new Random();
         for (long movieId : movieIds) {
-            movieService.fetchAndSaveMovie(movieId, dto);
+            var movie = movieService.fetchAndSaveMovie(movieId, dto);
+
+            var showing = new Showing();
+            showing.setMovie(movie);
+            showing.setPrice(10.0);
+            showing.setDate(LocalDate.now());
+            showing.setStartTime(LocalTime.now());
+            showing.setEndTime(LocalTime.now().plusHours(2));
+
+            showing.setScreen(screens.get(random.nextInt(screens.size())));
+            showings.add(showing);
         }
+
+
+        showingRepository.saveAll(showings);
 
         var user = new User();
         user.setName("Admin1");

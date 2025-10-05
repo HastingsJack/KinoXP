@@ -1,6 +1,6 @@
 package org.example.kinoxp.services;
 
-import org.example.kinoxp.dto.UserDto;
+import org.example.kinoxp.dtos.UserDto;
 import org.example.kinoxp.mappers.UserMapper;
 import org.example.kinoxp.models.User;
 import org.example.kinoxp.models.enums.Role;
@@ -11,11 +11,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
