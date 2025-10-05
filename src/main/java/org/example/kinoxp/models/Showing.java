@@ -2,6 +2,7 @@ package org.example.kinoxp.models;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 // !!! This is what lombok does !!!
@@ -43,5 +44,14 @@ public class Showing {
     private Screen screen;
     @OneToMany(mappedBy = "showing")
     private Set<Ticket> tickets;
+
+    //
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = LocalTime.parse(startTime.format(DateTimeFormatter.ofPattern("HH:mm")));
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = LocalTime.parse(endTime.format(DateTimeFormatter.ofPattern("HH:mm")));
+    }
 
 }
