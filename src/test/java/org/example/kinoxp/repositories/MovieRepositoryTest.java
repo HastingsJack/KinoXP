@@ -37,11 +37,11 @@ public class MovieRepositoryTest {
         assertEquals(1, movies.size());
     }
 
-    @Test
-    public void testOkHttpOnActiveMovies() throws IOException {
-        okhttp3.OkHttpClient client = new okhttp3.OkHttpClient();
-        okhttp3.Request request = new okhttp3.Request.Builder().url("http://localhost:8080/active").build();
-        okhttp3.Response response = client.newCall(request).execute();
-        System.out.println(response.body());
-    }
+//    @Test
+//    public void testOkHttpOnActiveMovies() throws IOException {
+//        okhttp3.OkHttpClient client = new okhttp3.OkHttpClient();
+//        okhttp3.Request request = new okhttp3.Request.Builder().url("http://localhost:8080/active").build();
+//        okhttp3.Response response = client.newCall(request).execute();
+//        System.out.println(response.body());
+//    }
 }
