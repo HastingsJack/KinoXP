@@ -6,11 +6,13 @@ import org.example.kinoxp.dtos.showingDtos.ShowingDto;
 import org.example.kinoxp.exceptions.MovieNotFoundException;
 import org.example.kinoxp.exceptions.ScreenNotFoundException;
 import org.example.kinoxp.exceptions.ShowingNotFoundException;
+import org.example.kinoxp.models.Showing;
 import org.example.kinoxp.services.ShowingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +31,19 @@ public class ShowingController {
     public List<ShowingDto> getAll(
             @RequestParam(required = false, name = "movieId") Long movieId) {
         return showingService.getAll(movieId);
+    }
+
+    @GetMapping("/upcoming")
+    public List<ShowingDto> getUpcomingShowings(
+            @RequestParam(required = false, name = "date")LocalDate date
+            ){
+        System.out.println("You've reached getUpcomingShowings");
+        List<ShowingDto> showings = showingService.getUpcoming(date);
+        System.out.println("date is: " + date);
+        System.out.println("returning " + showings.size() + "showings");
+        return showingService.getUpcoming(date);
+
+
     }
 
     @PostMapping
