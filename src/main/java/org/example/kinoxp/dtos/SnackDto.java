@@ -18,6 +18,8 @@ public class SnackDto {
     // If Null, then the message will be shown.
     @NotNull(message = "Indtast en pris")
     private Double price;
+    @NotNull(message = "Indsæt et billede")
     private String snackImg;
+    @NotNull(message = "Indtast en beskrivelse")
     private String description;
 }
