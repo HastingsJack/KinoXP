@@ -39,20 +39,28 @@ public class InitData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         var snack = new Snack();
-        snack.setName("Snack 1");
-        snack.setSize("medium");
+        snack.setName("Popcorn");
+        snack.setSize("Medium");
         snack.setPrice(10.0);
         snack.setSnackImg("snack1.jpg");
         snack.setDescription("Snack 1 description");
         snackRepository.save(snack);
 
         var snack2 = new Snack();
-        snack2.setName("Snack 2");
-        snack2.setSize("large");
+        snack2.setName("Popcorn");
+        snack2.setSize("Large");
         snack2.setPrice(20.0);
         snack2.setSnackImg("snack2.jpg");
         snack2.setDescription("Snack 2 description");
         snackRepository.save(snack2);
+
+        var snack3 = new Snack();
+        snack3.setName("Popcorn");
+        snack3.setSize("Small");
+        snack3.setPrice(5.0);
+        snack3.setSnackImg("snack3.jpg");
+        snack3.setDescription("Snack 3 description");
+        snackRepository.save(snack3);
 
         List<Screen> screens = new ArrayList<>();
         Screen big = new Screen();
