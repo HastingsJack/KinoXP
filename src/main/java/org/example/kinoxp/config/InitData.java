@@ -68,7 +68,7 @@ public class InitData implements CommandLineRunner {
         screens.add(small);
         screenRepository.saveAll(screens);
 
-        long[] movieIds = {617126, 1054867, 1387190, 1038392};
+        long[] movieIds = {617126, 1054867, 1311031, 1038392, 1202152};
         MoviePeriodDto dto = new MoviePeriodDto();
         LocalDate today = LocalDate.now();
         LocalDate future = today.plusDays(20);
