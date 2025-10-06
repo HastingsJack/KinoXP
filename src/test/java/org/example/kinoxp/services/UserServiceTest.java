@@ -1,6 +1,6 @@
 package org.example.kinoxp.services;
 
-import org.example.kinoxp.dtos.UserDto;
+import org.example.kinoxp.dtos.userDto.UserDto;
 import org.example.kinoxp.mappers.UserMapper;
 import org.example.kinoxp.models.User;
 import org.example.kinoxp.models.enums.Role;

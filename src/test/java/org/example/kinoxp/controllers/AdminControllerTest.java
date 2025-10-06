@@ -1,6 +1,6 @@
 package org.example.kinoxp.controllers;
 
-import org.example.kinoxp.dtos.UserDto;
+import org.example.kinoxp.dtos.userDto.UserDto;
 import org.example.kinoxp.models.enums.Role;
 import org.example.kinoxp.services.UserService;
 import org.junit.jupiter.api.Test;

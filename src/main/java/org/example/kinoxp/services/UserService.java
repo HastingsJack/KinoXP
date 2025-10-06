@@ -1,28 +1,33 @@
 package org.example.kinoxp.services;
 
 import jakarta.validation.Valid;
-import org.example.kinoxp.dtos.UserDto;
+import org.example.kinoxp.dtos.userDto.LoginRequestDto;
+import org.example.kinoxp.dtos.userDto.UserDto;
 import org.example.kinoxp.exceptions.UserNotFoundException;
 import org.example.kinoxp.mappers.UserMapper;
+import org.example.kinoxp.models.User;
 import org.example.kinoxp.repositories.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
-
-
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
-    public UserService(UserMapper userMapper, UserRepository userRepository) {
+    public UserService(UserMapper userMapper, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userMapper = userMapper;
+        this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
     }
 
     public UserDto createUser(UserDto userDto) {
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
         var user = userMapper.toUserModel(userDto);
         var saved = userRepository.save(user);
         userRepository.save(user);
@@ -69,5 +74,11 @@ public class UserService {
         var user = userRepository.findById(id).orElse(null);
         var userDto = userMapper.toUserDto(user);
         return userDto;
+    }
+
+    // Don't know if this is smart
+    public Optional<User> checkCredentials(LoginRequestDto request){
+        // I'll handle the optional in authentication service
+        return userRepository.findUserByEmail(request.getEmail());
     }
 }
