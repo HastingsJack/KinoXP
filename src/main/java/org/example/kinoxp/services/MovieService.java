@@ -16,6 +16,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -158,7 +159,7 @@ public class MovieService {
         }
     }
 
-    public Set<Movie> getActiveMovies() {
+    public List<Movie> getActiveMovies() {
         return movieRepository.findByEndDateAfter(LocalDate.now());
     }
 
