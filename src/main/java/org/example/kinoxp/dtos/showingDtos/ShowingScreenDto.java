@@ -6,4 +6,7 @@ import lombok.Data;
 public class ShowingScreenDto {
     private Byte id;
     private String name;
+    private Integer seatColumns;
+    private Integer seatRows;
+
 }
