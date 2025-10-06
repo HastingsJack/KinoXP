@@ -6,6 +6,7 @@ import org.example.kinoxp.services.MovieService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -30,7 +31,7 @@ public class MovieController {
     }
 
     @GetMapping("/active")
-    public Set<Movie> fetchActiveMovies() {
+    public List<Movie> fetchActiveMovies() {
         return movieService.getActiveMovies();
     }
 }

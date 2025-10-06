@@ -1,5 +1,6 @@
 package org.example.kinoxp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,6 +42,7 @@ public class Movie {
     private Set<String> genres;
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(
             name = "movie_actor",
             joinColumns = @JoinColumn(name = "movie_id"),
@@ -49,5 +51,6 @@ public class Movie {
     private Set<Actor> actors;
 
     @OneToMany(mappedBy = "movie")
+    @JsonIgnore
     private Set<Showing> showings;
 }
