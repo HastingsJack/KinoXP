@@ -1,5 +1,6 @@
 package org.example.kinoxp.controllers;
 
+import org.example.kinoxp.config.SecurityConfig;
 import org.example.kinoxp.dtos.userDto.UserDto;
 import org.example.kinoxp.models.enums.Role;
 import org.example.kinoxp.services.UserService;
@@ -7,7 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -18,6 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @WebMvcTest(controllers = AdminController.class)
+@Import(SecurityConfig.class)
 class AdminControllerTest {
 
     @Autowired
@@ -27,11 +31,14 @@ class AdminControllerTest {
     @MockBean
     UserService userService;
 
+    @MockBean
+    PasswordEncoder passwordEncoder;
+
 
     @Test
     void createUser_returns201_andBody() throws Exception {
         // Arrange
-
+        when(passwordEncoder.encode(any(String.class))).thenReturn("testPassword");
         String json = """
                 {
                   "name": "testname",
