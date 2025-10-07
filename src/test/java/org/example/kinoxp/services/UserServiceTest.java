@@ -11,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.when;
@@ -27,6 +28,9 @@ class UserServiceTest {
     @InjectMocks
     UserService userService;
 
+    @Mock
+    PasswordEncoder passwordEncoder;
+
     @BeforeEach
     void setUp() {
     }
@@ -34,6 +38,7 @@ class UserServiceTest {
     @Test
     void createUser_maps_saves_SetsID_andReturnsDTO() {
         //arrange
+        when(passwordEncoder.encode("testPassword")).thenReturn("testPassword");
         UserDto input = new UserDto(null, "testName", "testEmail", "testPassword", 13, Role.ADMIN);
 
         User mapped = new User();
