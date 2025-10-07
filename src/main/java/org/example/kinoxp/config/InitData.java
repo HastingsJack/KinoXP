@@ -45,25 +45,49 @@ public class InitData implements CommandLineRunner {
         snack.setName("Popcorn");
         snack.setSize("Medium");
         snack.setPrice(10.0);
-        snack.setSnackImg("snack1.jpg");
-        snack.setDescription("Snack 1 description");
+        snack.setSnackImg("https://images.unsplash.com/photo-1691480213129-106b2c7d1ee8?q=80&w=580&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+        snack.setDescription("");
         snackRepository.save(snack);
 
         var snack2 = new Snack();
         snack2.setName("Popcorn");
         snack2.setSize("Large");
         snack2.setPrice(20.0);
-        snack2.setSnackImg("snack2.jpg");
-        snack2.setDescription("Snack 2 description");
+        snack2.setSnackImg("https://images.unsplash.com/photo-1691480213129-106b2c7d1ee8?q=80&w=580&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+        snack2.setDescription("");
         snackRepository.save(snack2);
 
         var snack3 = new Snack();
         snack3.setName("Popcorn");
         snack3.setSize("Small");
         snack3.setPrice(5.0);
-        snack3.setSnackImg("snack3.jpg");
-        snack3.setDescription("Snack 3 description");
+        snack3.setSnackImg("https://images.unsplash.com/photo-1691480213129-106b2c7d1ee8?q=80&w=580&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+        snack3.setDescription("");
         snackRepository.save(snack3);
+
+        var snack4 = new Snack();
+        snack4.setName("Flaskevand");
+        snack4.setSize("");
+        snack4.setPrice(5.0);
+        snack4.setSnackImg("https://plus.unsplash.com/premium_photo-1681284939219-acfc2faa7eb8?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+        snack4.setDescription("");
+        snackRepository.save(snack4);
+
+        var snack5 = new Snack();
+        snack5.setName("Haribo Guldbamser");
+        snack5.setSize("");
+        snack5.setPrice(7.5);
+        snack5.setSnackImg("https://img.imageboss.me/mdkp/height/350/format:auto/PIM/IMG/DK/50039708.jpg");
+        snack5.setDescription("");
+        snackRepository.save(snack5);
+
+        var snack6 = new Snack();
+        snack6.setName("Haribo Matador");
+        snack6.setSize("");
+        snack6.setPrice(7.5);
+        snack6.setSnackImg("https://cdn.lomax.dk/images/t_item_large/f_auto/v1589523719/produkter/3739900/haribo-matador-mix-120-g.jpg");
+        snack6.setDescription("");
+        snackRepository.save(snack6);
 
         List<Screen> screens = new ArrayList<>();
         Screen big = new Screen();
