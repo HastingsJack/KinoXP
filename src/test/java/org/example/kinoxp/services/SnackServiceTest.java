@@ -116,8 +116,7 @@ class SnackServiceTest {
             model.setSnackImg(dto.getSnackImg());
             model.setDescription(dto.getDescription());
             return null;
-        }).when(snackMapper).update(snackDto1, snack1);
-        when(snackRepository.save(snack1)).thenReturn(snack1);
+        }).when(snackMapper).update(any(SnackDto.class), any(Snack.class));
 
         // Act
         var snack = snackRepository.findById(1).orElse(null);

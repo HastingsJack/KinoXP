@@ -9,5 +9,6 @@ import java.util.Set;
 
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 
-    List<Movie> findByEndDateAfter(LocalDate date);
+    List<Movie> findByStartDateLessThanEqualAndEndDateGreaterThanEqual(LocalDate start, LocalDate end);
+    List<Movie> findByStartDateAfter(LocalDate date);
 }

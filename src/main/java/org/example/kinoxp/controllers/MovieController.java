@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @CrossOrigin("*")
@@ -33,5 +32,10 @@ public class MovieController {
     @GetMapping("/active")
     public List<Movie> fetchActiveMovies() {
         return movieService.getActiveMovies();
+    }
+
+    @GetMapping("/future")
+    public List<Movie> fetchFutureMovies() {
+        return movieService.getFutureMovies();
     }
 }

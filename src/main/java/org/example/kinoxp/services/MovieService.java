@@ -160,7 +160,10 @@ public class MovieService {
     }
 
     public List<Movie> getActiveMovies() {
-        return movieRepository.findByEndDateAfter(LocalDate.now());
+        return movieRepository.findByStartDateLessThanEqualAndEndDateGreaterThanEqual(LocalDate.now(), LocalDate.now());
     }
 
+    public List<Movie> getFutureMovies() {
+        return movieRepository.findByStartDateAfter(LocalDate.now());
+    }
 }
