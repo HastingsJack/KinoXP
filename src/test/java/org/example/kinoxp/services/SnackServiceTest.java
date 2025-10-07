@@ -99,34 +99,34 @@ class SnackServiceTest {
         assertEquals(snackDto1, snackDto);
     }
 
-//    @Test
-//    void updateSnack() {
-//        // Arrange
-//        when(snackRepository.findById(1)).thenReturn(Optional.of(snack1));
-//        // when a method i void, we can use doNothing()
-//        //doNothing().when(snackMapper).update(any(SnackDto.class), any(Snack.class));
-//        // I want it to change the object therefor i can use doAnswer.
-//        // We simulate how the MapStruct update method works.
-//        doAnswer(invocation -> {
-//            SnackDto dto = invocation.getArgument(0);
-//            Snack model = invocation.getArgument(1);
-//            model.setName(dto.getName());
-//            model.setSize(dto.getSize());
-//            model.setPrice(dto.getPrice());
-//            model.setSnackImg(dto.getSnackImg());
-//            model.setDescription(dto.getDescription());
-//            return null;
-//        }).when(snackMapper).update(any(SnackDto.class), any(Snack.class));
-//
-//        // Act
-//        var snack = snackRepository.findById(1).orElse(null);
-//        snackMapper.update(snackDto1, snack);
-//
-//        // Assert
-//        assertEquals(snackDto1.getName(), snack.getName());
-//        assertEquals(snackDto1.getSize(), snack.getSize());
-//        assertEquals(snackDto1.getPrice(), snack.getPrice());
-//        assertEquals(snackDto1.getSnackImg(), snack.getSnackImg());
-//        assertEquals(snackDto1.getDescription(), snack.getDescription());
-//    }
+    @Test
+    void updateSnack() {
+        // Arrange
+        when(snackRepository.findById(1)).thenReturn(Optional.of(snack1));
+        // when a method i void, we can use doNothing()
+        //doNothing().when(snackMapper).update(any(SnackDto.class), any(Snack.class));
+        // I want it to change the object therefor i can use doAnswer.
+        // We simulate how the MapStruct update method works.
+        doAnswer(invocation -> {
+            SnackDto dto = invocation.getArgument(0);
+            Snack model = invocation.getArgument(1);
+            model.setName(dto.getName());
+            model.setSize(dto.getSize());
+            model.setPrice(dto.getPrice());
+            model.setSnackImg(dto.getSnackImg());
+            model.setDescription(dto.getDescription());
+            return null;
+        }).when(snackMapper).update(any(SnackDto.class), any(Snack.class));
+
+        // Act
+        var snack = snackRepository.findById(1).orElse(null);
+        snackMapper.update(snackDto1, snack);
+
+        // Assert
+        assertEquals(snackDto1.getName(), snack.getName());
+        assertEquals(snackDto1.getSize(), snack.getSize());
+        assertEquals(snackDto1.getPrice(), snack.getPrice());
+        assertEquals(snackDto1.getSnackImg(), snack.getSnackImg());
+        assertEquals(snackDto1.getDescription(), snack.getDescription());
+    }
 }
