@@ -39,14 +39,14 @@ public class MovieServiceTest {
 
     @Test
     void getActiveMoviesTest() throws Exception {
-        Mockito.when(movieRepository.findByEndDateAfter(LocalDate.now()))
+        Mockito.when(movieRepository.findByStartDateLessThanEqualAndEndDateGreaterThanEqual(LocalDate.now(), LocalDate.now()))
                 .thenReturn(List.of(movie));
 
         List<Movie> active = movieService.getActiveMovies();
 
         assertEquals(1,active.size());
         assertEquals("Test",active.getFirst().getTitle());
-        Mockito.verify(movieRepository).findByEndDateAfter(LocalDate.now());
+        Mockito.verify(movieRepository).findByStartDateLessThanEqualAndEndDateGreaterThanEqual(LocalDate.now(), LocalDate.now());
     }
 
 }
