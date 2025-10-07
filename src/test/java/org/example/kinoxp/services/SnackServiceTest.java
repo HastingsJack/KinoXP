@@ -21,14 +21,14 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class SnackServiceTest {
 
-    @Mock
-    private SnackRepository snackRepository;
+        @Mock
+        private SnackRepository snackRepository;
 
-    @Mock
-    private SnackMapper snackMapper;
+        @Mock
+        private SnackMapper snackMapper;
 
-    @InjectMocks
-    private SnackService snackService;
+        @InjectMocks
+        private SnackService snackService;
 
     List<Snack> snacks = new ArrayList<>();
     List<SnackDto> snackDtos = new ArrayList<>();
@@ -116,20 +116,18 @@ class SnackServiceTest {
             model.setSnackImg(dto.getSnackImg());
             model.setDescription(dto.getDescription());
             return null;
-        }).when(snackMapper).update(any(SnackDto.class), any(Snack.class));
+        }).when(snackMapper).update(snackDto1, snack1);
         when(snackRepository.save(snack1)).thenReturn(snack1);
 
         // Act
         var snack = snackRepository.findById(1).orElse(null);
         snackMapper.update(snackDto1, snack);
-        snackRepository.save(snack);
 
         // Assert
-        assertEquals(snackDto1, snack);
-
-    }
-
-    @Test
-    void deleteSnack() {
+        assertEquals(snackDto1.getName(), snack.getName());
+        assertEquals(snackDto1.getSize(), snack.getSize());
+        assertEquals(snackDto1.getPrice(), snack.getPrice());
+        assertEquals(snackDto1.getSnackImg(), snack.getSnackImg());
+        assertEquals(snackDto1.getDescription(), snack.getDescription());
     }
 }
