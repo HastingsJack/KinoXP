@@ -1,7 +1,7 @@
 package org.example.kinoxp.controllers;
 
 import jakarta.validation.Valid;
-import org.example.kinoxp.dtos.UserDto;
+import org.example.kinoxp.dtos.userDto.UserDto;
 import org.example.kinoxp.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -62,6 +62,4 @@ public class AdminController {
         var response = userService.deleteUser(id);
         return ResponseEntity.ok(( response));
     }
-
-
 }
