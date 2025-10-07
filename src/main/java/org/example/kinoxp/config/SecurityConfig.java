@@ -67,6 +67,7 @@ public class SecurityConfig {
                         //.anyRequest().authenticated()
                 );
 
+        // build rules
         return http.build();
     }
 
