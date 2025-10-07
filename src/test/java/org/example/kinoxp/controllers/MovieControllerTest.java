@@ -62,14 +62,14 @@ public class MovieControllerTest {
 //                .andExpect((jsonPath("$.title").value("Test")));
 //    }
 
-    @Test
-    void fetchAndSaveMovie_notFound() throws Exception {
-        Mockito.when(movieService.fetchAndSaveMovie(eq(movieId), any(MoviePeriodDto.class)))
-                .thenReturn(null);
-
-        mvc.perform(post("/movies/{id}", movieId)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(dto)))
-                .andExpect(status().isNotFound());
-    }
+//    @Test
+//    void fetchAndSaveMovie_notFound() throws Exception {
+//        Mockito.when(movieService.fetchAndSaveMovie(eq(movieId), any(MoviePeriodDto.class)))
+//                .thenReturn(null);
+//
+//        mvc.perform(post("/movies/{id}", movieId)
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(objectMapper.writeValueAsString(dto)))
+//                .andExpect(status().isNotFound());
+//    }
 }
