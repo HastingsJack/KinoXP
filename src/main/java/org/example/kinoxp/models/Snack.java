@@ -40,5 +40,17 @@ public class Snack {
     @JoinColumn(name = "snackOrder_id")
     private SnackOrder snackOrder;
 
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if(!(o instanceof Snack)) return false;
+
+        return id.equals(((Snack) o).getId());
+    }
 
 }
