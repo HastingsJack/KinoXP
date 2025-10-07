@@ -1,6 +1,7 @@
 package org.example.kinoxp.mappers;
 
-import org.example.kinoxp.dtos.UserDto;
+import org.example.kinoxp.dtos.userDto.LoginResponseDto;
+import org.example.kinoxp.dtos.userDto.UserDto;
 import org.example.kinoxp.models.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
@@ -9,6 +10,8 @@ import org.mapstruct.MappingTarget;
 public interface UserMapper {
     
     UserDto toUserDto(User user);
+
+    LoginResponseDto toLoginUserResponseDto(User user);
 
     User toUserModel(UserDto userDto);
 

@@ -13,6 +13,7 @@ import org.example.kinoxp.repositories.SnackRepository;
 import org.example.kinoxp.services.MovieService;
 import org.example.kinoxp.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -35,6 +36,8 @@ public class InitData implements CommandLineRunner {
     private final MovieService movieService;
     private final ShowingRepository showingRepository;
     private final ScreenRepository screenRepository;
+    // We need this to encode the password
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
@@ -104,7 +107,7 @@ public class InitData implements CommandLineRunner {
 
         var user = new User();
         user.setName("Admin1");
-        user.setPassword("password123");
+        user.setPassword(passwordEncoder.encode("password123"));
         user.setAge(99);
         user.setEmail("adminEmail@email.com");
         user.setRole(ADMIN);
@@ -112,7 +115,7 @@ public class InitData implements CommandLineRunner {
 
         var user2 = new User();
         user2.setName("Employee1");
-        user2.setPassword("password123");
+        user2.setPassword(passwordEncoder.encode("password123"));
         user2.setAge(23);
         user2.setEmail("Employee1Email@email.com");
         user2.setRole(EMPLOYEE);
@@ -120,7 +123,7 @@ public class InitData implements CommandLineRunner {
 
         var user3 = new User();
         user3.setName("Employee2");
-        user3.setPassword("password123");
+        user3.setPassword(passwordEncoder.encode("password123"));
         user3.setAge(34);
         user3.setEmail("hello@email.com");
         user3.setRole(EMPLOYEE);
@@ -128,7 +131,7 @@ public class InitData implements CommandLineRunner {
 
         var user4 = new User();
         user4.setName("Employee3");
-        user4.setPassword("ilikecats321");
+        user4.setPassword(passwordEncoder.encode("ilikecats321"));
         user4.setAge(43);
         user4.setEmail("meow@email.com");
         user4.setRole(EMPLOYEE);
