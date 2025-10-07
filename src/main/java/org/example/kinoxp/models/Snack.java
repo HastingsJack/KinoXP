@@ -36,7 +36,7 @@ public class Snack {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "snackOrder_id")
     private SnackOrder snackOrder;
 
