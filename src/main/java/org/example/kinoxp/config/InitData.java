@@ -3,15 +3,9 @@ package org.example.kinoxp.config;
 
 import lombok.AllArgsConstructor;
 import org.example.kinoxp.dtos.MoviePeriodDto;
-import org.example.kinoxp.models.Screen;
-import org.example.kinoxp.models.Showing;
-import org.example.kinoxp.models.Snack;
-import org.example.kinoxp.models.User;
-import org.example.kinoxp.repositories.ScreenRepository;
-import org.example.kinoxp.repositories.ShowingRepository;
-import org.example.kinoxp.repositories.SnackRepository;
+import org.example.kinoxp.models.*;
+import org.example.kinoxp.repositories.*;
 import org.example.kinoxp.services.MovieService;
-import org.example.kinoxp.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -38,6 +32,7 @@ public class InitData implements CommandLineRunner {
     private final ScreenRepository screenRepository;
     // We need this to encode the password
     private final PasswordEncoder passwordEncoder;
+    private final WorkAssignmentRepository workAssignmentRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -160,6 +155,61 @@ public class InitData implements CommandLineRunner {
         user4.setEmail("meow@email.com");
         user4.setRole(EMPLOYEE);
         userRepository.save(user4);
+
+        List<WorkAssignment> assignments = new ArrayList<>();
+
+        assignments.add(new WorkAssignment(
+                null,
+                LocalTime.of(9, 0),
+                LocalTime.of(17, 0),
+                LocalDate.now().plusDays(1), // tomorrow
+                user
+        ));
+
+        assignments.add(new WorkAssignment(
+                null,
+                LocalTime.of(14, 0),
+                LocalTime.of(22, 0),
+                LocalDate.now().plusDays(2),
+                user2
+        ));
+
+        assignments.add(new WorkAssignment(
+                null,
+                LocalTime.of(8, 0),
+                LocalTime.of(16, 0),
+                LocalDate.now().plusDays(1),
+                user3
+        ));
+
+        assignments.add(new WorkAssignment(
+                null,
+                LocalTime.of(12, 0),
+                LocalTime.of(20, 0),
+                LocalDate.now().plusDays(3),
+                user4
+        ));
+
+        assignments.add(new WorkAssignment(
+                null,
+                LocalTime.of(10, 0),
+                LocalTime.of(18, 0),
+                LocalDate.now().plusDays(2),
+                user
+        ));
+
+        assignments.add(new WorkAssignment(
+                null,
+                LocalTime.of(9, 0),
+                LocalTime.of(13, 0),
+                LocalDate.now().plusDays(4),
+                user4
+        ));
+
+        workAssignmentRepository.saveAll(assignments);
+
+
+
 
     }
 }
