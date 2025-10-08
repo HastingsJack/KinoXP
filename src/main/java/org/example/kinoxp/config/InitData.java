@@ -126,6 +126,17 @@ public class InitData implements CommandLineRunner {
             showings.add(showing);
         }
 
+        long[] futureMovieIds = {1197137, 948};
+        dto = new MoviePeriodDto();
+        LocalDate futureMovie = today.plusDays(20);
+        LocalDate futureMoviePlusDays = today.plusDays(40);
+        dto.setStartDate(futureMovie);
+        dto.setEndDate(futureMoviePlusDays);
+
+        for(long ids : futureMovieIds) {
+            movieService.fetchAndSaveMovie(ids, dto);
+        }
+
 
         showingRepository.saveAll(showings);
 
