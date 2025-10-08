@@ -31,4 +31,14 @@ public class TicketController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(ticketDto);
     }
+
+    @PutMapping
+    public ResponseEntity<TicketDto> updateTicket(@RequestBody RegisterTicketDto request){
+        return null;
+    }
+
+    @DeleteMapping
+    public boolean deleteTicket(@PathVariable(name = "id") Integer id){
+        return false;
+    }
 }

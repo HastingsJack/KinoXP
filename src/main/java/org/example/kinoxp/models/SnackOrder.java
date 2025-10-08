@@ -35,8 +35,8 @@ public class SnackOrder {
     @ManyToOne
     private Ticket ticket;
 
-    @OneToMany (mappedBy = "snackOrder")
-    @JsonIgnore
-    private Set<Snack> snack;
+    @ManyToOne
+    @JoinColumn(name = "snack_id")
+    private Snack snack;
 
 }
