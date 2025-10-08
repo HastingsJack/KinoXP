@@ -2,11 +2,10 @@ package org.example.kinoxp.controllers;
 
 import org.example.kinoxp.dtos.workAssignmentDtos.WorkAssignmentDto;
 import org.example.kinoxp.services.WorkAssignmentService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -23,8 +22,14 @@ public class WorkAssignmentController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/shifts")
-    public List<WorkAssignmentDto>  getShifts() {
-        return workAssignmentService.getShifts();
+    public List<WorkAssignmentDto>  getShifts(
+            @RequestParam(required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            LocalDate start,
+            @RequestParam(required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            LocalDate end) {
+        return workAssignmentService.getShifts(start, end);
     }
 
 
