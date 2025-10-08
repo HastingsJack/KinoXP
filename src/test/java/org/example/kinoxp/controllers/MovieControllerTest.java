@@ -1,6 +1,7 @@
 package org.example.kinoxp.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.kinoxp.config.SecurityConfig;
 import org.example.kinoxp.dtos.MoviePeriodDto;
 import org.example.kinoxp.models.Movie;
 import org.example.kinoxp.services.MovieService;
@@ -10,6 +11,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -23,6 +25,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(MovieController.class)
+@Import(SecurityConfig.class)
 public class MovieControllerTest {
 
     @Autowired
@@ -49,27 +52,27 @@ public class MovieControllerTest {
         movie.setTitle("Test");
     }
 
-    //Receiving SpringSecurity CSRF error so this is commented out
-//    @Test
-//    void fetchAndSaveMovie() throws Exception {
-//        Mockito.when(movieService.fetchAndSaveMovie(eq(movieId), any(MoviePeriodDto.class)))
-//                .thenReturn(movie);
-//
-//        mvc.perform(post("/movies/{id}", movieId)
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(objectMapper.writeValueAsString(dto)))
-//                .andExpect(status().isOk())
-//                .andExpect((jsonPath("$.title").value("Test")));
-//    }
 
-//    @Test
-//    void fetchAndSaveMovie_notFound() throws Exception {
-//        Mockito.when(movieService.fetchAndSaveMovie(eq(movieId), any(MoviePeriodDto.class)))
-//                .thenReturn(null);
-//
-//        mvc.perform(post("/movies/{id}", movieId)
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(objectMapper.writeValueAsString(dto)))
-//                .andExpect(status().isNotFound());
-//    }
+    @Test
+    void fetchAndSaveMovie() throws Exception {
+        Mockito.when(movieService.fetchAndSaveMovie(eq(movieId), any(MoviePeriodDto.class)))
+                .thenReturn(movie);
+
+        mvc.perform(post("/movies/{id}", movieId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto)))
+                .andExpect(status().isOk())
+                .andExpect((jsonPath("$.title").value("Test")));
+    }
+
+    @Test
+    void fetchAndSaveMovie_notFound() throws Exception {
+        Mockito.when(movieService.fetchAndSaveMovie(eq(movieId), any(MoviePeriodDto.class)))
+                .thenReturn(null);
+
+        mvc.perform(post("/movies/{id}", movieId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto)))
+                .andExpect(status().isNotFound());
+    }
 }
