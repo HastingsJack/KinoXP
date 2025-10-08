@@ -8,8 +8,12 @@ import org.example.kinoxp.dtos.ticketDtos.RegisterTicketDto;
 import org.example.kinoxp.dtos.ticketDtos.TicketDto;
 import org.example.kinoxp.exceptions.*;
 import org.example.kinoxp.mappers.TicketMapper;
+import org.example.kinoxp.models.Ticket;
 import org.example.kinoxp.repositories.TicketRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Service
 public class TicketService {
 
@@ -23,10 +27,17 @@ public class TicketService {
 
     public TicketDto createTicket(RegisterTicketDto request){
         var ticket = ticketMapper.toModel(request);
-        ticketRepository.save(ticket);
 
-        request.setId(ticket.getId());
-        return ticketMapper.toDto(ticket);
+        List<Ticket> ticketsExisting = ticketRepository.findByShowingIdAndSeat( request.getShowing().getId(), request.getSeat());
+        if(ticketsExisting.isEmpty()){
+            ticketRepository.save(ticket);
+
+            request.setId(ticket.getId());
+            return ticketMapper.toDto(ticket);
+        }else{
+            return null;
+        }
+
 
     }
 
