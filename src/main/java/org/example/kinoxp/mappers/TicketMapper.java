@@ -16,7 +16,7 @@ public interface TicketMapper {
 
     TicketDto toDto(Ticket ticket);
 
-    TicketSnackOrderDto toSweetOrderDto(SnackOrder snackOrder);
+    TicketSnackOrderDto toSnackOrderDto(SnackOrder snackOrder);
 
     Ticket toModel(RegisterTicketDto request);
 }
