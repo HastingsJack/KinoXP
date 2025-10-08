@@ -1,5 +1,6 @@
 package org.example.kinoxp.services;
 
+import jakarta.validation.Valid;
 import org.example.kinoxp.dtos.workAssignmentDtos.WorkAssignmentDto;
 import org.example.kinoxp.exceptions.WorkAssignmentNotFoundException;
 import org.example.kinoxp.mappers.WorkAssignmentMapper;
@@ -28,6 +29,7 @@ public class WorkAssignmentService {
         List<WorkAssignment> shifts = new ArrayList<>();
         var shiftsDTO = new ArrayList<WorkAssignmentDto>();
 
+        //here we figure out what the format of the URL was used, and use appropiate methods:
         if (start != null && end != null) {
             shifts = workAssignmentRepository.findByDateBetween(start, end);
 
@@ -53,4 +55,23 @@ public class WorkAssignmentService {
     }
 
 
+    public WorkAssignmentDto updateShift(Long id, @Valid WorkAssignmentDto request) {
+       var workAssignment = workAssignmentRepository.findById(id).orElse(null);
+       if (workAssignment == null) {
+           throw new WorkAssignmentNotFoundException("Work assignment not found");
+       }
+       request.setId(workAssignment.getId().intValue());
+       workAssignmentMapper.update(request,workAssignment);
+       workAssignmentRepository.save(workAssignment);
+
+        return request;
+    }
+
+    public WorkAssignmentDto getShiftByID(Long id) {
+        var workAssignment = workAssignmentRepository.findById(id).orElse(null);
+        if (workAssignment == null) {
+            throw new WorkAssignmentNotFoundException("Work assignment not found");
+        }
+        return workAssignmentMapper.toDto(workAssignment);
+    }
 }
