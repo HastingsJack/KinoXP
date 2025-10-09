@@ -51,8 +51,8 @@ public class TicketController {
         return null;
     }
 
-    @DeleteMapping
-    public boolean deleteTicket(@PathVariable(name = "id") Integer id){
-        return false;
+    @DeleteMapping("/{id}")
+    public boolean deleteTicket(@PathVariable(name = "id") Long id){
+        return ticketService.deleteTicket(id);
     }
 }
