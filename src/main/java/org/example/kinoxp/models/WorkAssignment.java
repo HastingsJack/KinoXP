@@ -6,6 +6,7 @@ import java.time.LocalTime;
 // !!! This is what lombok does !!!
 // If you don't want lombok, you can remove this import
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,5 +34,6 @@ public class WorkAssignment {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 }
