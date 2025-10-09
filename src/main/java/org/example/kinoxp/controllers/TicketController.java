@@ -21,7 +21,12 @@ public class TicketController {
 
     @GetMapping
     public List<TicketDto> getAll(){
-        return null;
+        return ticketService.getAll();
+    }
+
+    @GetMapping("/of-showing")
+    public List<TicketDto> getByShowing(@RequestParam(name = "showing") Long showing){
+        return ticketService.getByShowingId(showing);
     }
 
     @PostMapping
