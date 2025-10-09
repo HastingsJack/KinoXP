@@ -19,10 +19,15 @@ public class SnackOrderController {
     private final SnackOrderService snackOrderService;
 
     @PostMapping
-    public ResponseEntity<SnackOrderDto> createTicket(@RequestBody RegisterSnackOrderDto request){
+    public ResponseEntity<SnackOrderDto> createSnackOrder(@RequestBody RegisterSnackOrderDto request){
 
         SnackOrderDto snackOrderDto = snackOrderService.createSnackOrder(request);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(snackOrderDto);
+    }
+
+    @DeleteMapping("/by-movie/{movieId}")
+    public boolean deleteByMovieId(@PathVariable(name = "movieId")  Long movieId){
+        return false;
     }
 }

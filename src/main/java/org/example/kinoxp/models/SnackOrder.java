@@ -32,7 +32,7 @@ public class SnackOrder {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @ManyToOne
+    @ManyToOne()
     private Ticket ticket;
 
     @ManyToOne

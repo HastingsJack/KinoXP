@@ -12,6 +12,7 @@ import org.example.kinoxp.models.Ticket;
 import org.example.kinoxp.repositories.TicketRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,7 +25,7 @@ public class TicketService {
         this.ticketMapper = ticketMapper;
         this.ticketRepository = ticketRepository;
     }
-
+    //CREATE
     public TicketDto createTicket(RegisterTicketDto request){
         var ticket = ticketMapper.toModel(request);
 
@@ -40,7 +41,26 @@ public class TicketService {
 
 
     }
+    //READ:
+    public List<TicketDto> getAll(){
+        List<Ticket> tickets = ticketRepository.findAll();
+        List<TicketDto> ticketDtos = new ArrayList<>();
+        for (Ticket ticket : tickets) {
+            ticketDtos.add(ticketMapper.toDto(ticket));
+        }
+        return ticketDtos;
+    }
 
+    public List<TicketDto> getByShowingId(Long showingId){
+        List<TicketDto> ticketDtos = new ArrayList<>();
+        List<Ticket> tickets = ticketRepository.findByShowingId(showingId);
+        for (Ticket ticket : tickets) {
+            ticketDtos.add(ticketMapper.toDto(ticket));
+        }
+        return ticketDtos;
+    }
+
+    //UPDATE:
     public TicketDto updateTicket(Long id, RegisterTicketDto request) {
         var ticket = ticketRepository.findById(id).orElse(null);
         if(ticket == null) throw new TicketNotFoundException();
@@ -48,6 +68,8 @@ public class TicketService {
         return ticketMapper.toDto(ticket);
     }
 
+
+    //DELETE:
     public boolean deleteTicket(Long id) {
         var ticketToDelete = ticketRepository.findById(id).orElse(null);
         if(ticketToDelete == null){

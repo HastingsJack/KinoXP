@@ -30,7 +30,7 @@ public class Ticket {
     private String customerEmail;
     private String customerName;
     private String seat;
-    @OneToMany(mappedBy = "ticket")
+    @OneToMany(mappedBy = "ticket", orphanRemoval = true)
     private List<SnackOrder> snackOrders;
     @ManyToOne
     private Showing showing;

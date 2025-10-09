@@ -21,7 +21,12 @@ public class TicketController {
 
     @GetMapping
     public List<TicketDto> getAll(){
-        return null;
+        return ticketService.getAll();
+    }
+
+    @GetMapping("/of-showing")
+    public List<TicketDto> getByShowing(@RequestParam(name = "showing") Long showing){
+        return ticketService.getByShowingId(showing);
     }
 
     @PostMapping
@@ -46,8 +51,8 @@ public class TicketController {
         return null;
     }
 
-    @DeleteMapping
-    public boolean deleteTicket(@PathVariable(name = "id") Integer id){
-        return false;
+    @DeleteMapping("/{id}")
+    public boolean deleteTicket(@PathVariable(name = "id") Long id){
+        return ticketService.deleteTicket(id);
     }
 }
