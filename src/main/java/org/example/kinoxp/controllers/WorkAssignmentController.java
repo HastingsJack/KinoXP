@@ -52,6 +52,12 @@ public class WorkAssignmentController {
         return ResponseEntity.ok( response );
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<WorkAssignmentDto> deleteShift(@PathVariable Long id) {
+        var response = workAssignmentService.deleteShift(id);
+        return ResponseEntity.ok( response );
+    }
+
 
 
 }

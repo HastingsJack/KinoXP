@@ -74,4 +74,14 @@ public class WorkAssignmentService {
         }
         return workAssignmentMapper.toDto(workAssignment);
     }
+
+    public WorkAssignmentDto deleteShift(Long id) {
+        var workAssignment = workAssignmentRepository.findById(id).orElse(null);
+        if (workAssignment == null) {
+            throw new WorkAssignmentNotFoundException("Work assignment not found");
+        }
+        workAssignmentRepository.delete(workAssignment);
+        return workAssignmentMapper.toDto(workAssignment);
+
+    }
 }
