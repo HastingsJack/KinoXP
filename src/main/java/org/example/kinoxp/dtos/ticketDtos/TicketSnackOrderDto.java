@@ -17,5 +17,5 @@ import java.util.Set;
 public class TicketSnackOrderDto {
     private Long id;
     private Integer quantity;
-    private Set<TicketSnackDto> snack;
+    private TicketSnackDto snack;
 }

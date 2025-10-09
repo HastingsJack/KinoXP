@@ -4,6 +4,7 @@ package org.example.kinoxp.dtos.ticketDtos;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.example.kinoxp.dtos.showingDtos.ShowingDto;
 import org.example.kinoxp.models.Showing;
 import org.example.kinoxp.models.SnackOrder;
 
@@ -18,6 +19,6 @@ public class TicketDto {
     private String customerName;
     private String seat;
     private List<TicketSnackOrderDto> snackOrders;
-    private Showing showing;
+    private ShowingDto showing;
 
 }

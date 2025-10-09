@@ -3,11 +3,14 @@ package org.example.kinoxp.models;
 // !!! This is what lombok does !!!
 // If you don't want lombok, you can remove this import
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 // Here we create setter and getter methods
 @Setter
@@ -36,9 +39,9 @@ public class Snack {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne()
-    @JoinColumn(name = "snackOrder_id")
-    private SnackOrder snackOrder;
+    @OneToMany(mappedBy = "snack")
+    @JsonIgnore
+    private Set<SnackOrder> snackOrder;
 
     @Override
     public int hashCode() {

@@ -21,14 +21,38 @@ public class TicketController {
 
     @GetMapping
     public List<TicketDto> getAll(){
-        return null;
+        return ticketService.getAll();
+    }
+
+    @GetMapping("/of-showing")
+    public List<TicketDto> getByShowing(@RequestParam(name = "showing") Long showing){
+        return ticketService.getByShowingId(showing);
     }
 
     @PostMapping
     public ResponseEntity<TicketDto> createTicket(@RequestBody RegisterTicketDto request){
 
         TicketDto ticketDto = ticketService.createTicket(request);
+        if (ticketDto == null) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .build(); // or include an error message
+        }
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(ticketDto);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(ticketDto);
+    }
+
+
+
+    @PutMapping
+    public ResponseEntity<TicketDto> updateTicket(@RequestBody RegisterTicketDto request){
+        return null;
+    }
+
+    @DeleteMapping("/{id}")
+    public boolean deleteTicket(@PathVariable(name = "id") Long id){
+        return ticketService.deleteTicket(id);
     }
 }
