@@ -5,8 +5,6 @@ name: Build and deploy JAR app to Azure Web App - KinoXP
 
 on:
   pull_request:
-    branches:
-      - main
   push:
     branches:
       - main
