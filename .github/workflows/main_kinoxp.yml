@@ -4,6 +4,7 @@
 name: Build and deploy JAR app to Azure Web App - KinoXP
 
 on:
+
   push:
     branches:
       - main
