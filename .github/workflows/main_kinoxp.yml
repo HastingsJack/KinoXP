@@ -4,6 +4,9 @@
 name: Build and deploy JAR app to Azure Web App - KinoXP
 
 on:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
       - main
@@ -11,8 +14,10 @@ on:
 
 jobs:
   build:
+    name: Build & Test
     runs-on: ubuntu-latest
     permissions:
+      checks: write
       contents: read #This is required for actions/checkout
 
     steps:
@@ -25,7 +30,13 @@ jobs:
           distribution: 'microsoft'
 
       - name: Build with Maven
-        run: mvn clean install
+        run: mvn clean install -DskipTests
+
+      - name: Run Tests
+        run: mvn test
+      - name: Publish Test Report
+        if: success() || failure()
+        uses: scacap/action-surefire-report@v1
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -39,13 +50,13 @@ jobs:
     permissions:
       id-token: write #This is required for requesting the JWT
       contents: read #This is required for actions/checkout
-  
+
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: java-app
-      
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
